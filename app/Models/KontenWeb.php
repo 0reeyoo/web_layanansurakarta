@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class KontenWeb extends Model
 {
@@ -23,6 +24,15 @@ class KontenWeb extends Model
     protected $casts = [
         'published_at' => 'datetime',
     ];
+
+    /**
+     * Mendapatkan URL lengkap untuk gambar konten
+     */
+    public function getGambarUrlAttribute()
+    {
+        if (!$this->gambar) return null;
+        return Storage::disk('public')->url($this->gambar);
+    }
 
     public function user()
     {

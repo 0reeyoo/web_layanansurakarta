@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Pastikan CSS dimuat di awal agar tiles peta tidak berantakan -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+    #map { z-index: 10; border-radius: 1rem; border: 1px solid #e2e8f0; }
+    .leaflet-container img.leaflet-tile { max-width: none !important; max-height: none !important; }
+</style>
+
 <div class="max-w-4xl mx-auto px-4 py-8">
     <div class="bg-[#1e3a8a] text-white p-6 rounded-t-2xl shadow-lg">
         <h2 class="text-2xl font-bold">Form Pengaduan</h2>
@@ -128,10 +134,23 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // Logika Peta
-    const map = L.map('map').setView([-7.5666, 110.8243], 13);
+    // Logika Peta (fokus wilayah Surakarta)
+    const surakartaBounds = L.latLngBounds(
+        [-7.65, 110.70], // south-west
+        [-7.49, 110.92]  // north-east
+    );
+
+    const map = L.map('map', {
+        maxBounds: surakartaBounds,
+        maxBoundsViscosity: 1.0,
+        minZoom: 12
+    }).setView([-7.5666, 110.8243], 14);
+    
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
     
+    // Perbaikan untuk peta yang sering berantakan saat pertama kali dimuat
+    setTimeout(function(){ map.invalidateSize(); }, 500);
+
     let marker;
     const latInput = document.getElementById('lat');
     const lngInput = document.getElementById('lng');
@@ -148,7 +167,7 @@
         latInput.value = lat;
         lngInput.value = lng;
         
-        map.setView([lat, lng], 15);
+        map.setView([lat, lng], 16);
         
         locationInfo.classList.remove('hidden');
         selectedLocationText.textContent = locationName || `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
@@ -174,7 +193,6 @@
         searchTimeout = setTimeout(async () => {
             const scopedQuery = `${query}, Surakarta, Jawa Tengah`;
             const scopedUrl = `https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&countrycodes=id&accept-language=id&limit=8&q=${encodeURIComponent(scopedQuery)}&viewbox=110.70,-7.65,110.92,-7.49&bounded=1`;
-            const fallbackUrl = `https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&countrycodes=id&accept-language=id&limit=8&q=${encodeURIComponent(query + ', Indonesia')}`;
 
             const fetchLocations = async (url) => {
                 const response = await fetch(url, {
@@ -190,9 +208,13 @@
 
             try {
                 let data = await fetchLocations(scopedUrl);
-                if (!Array.isArray(data) || data.length === 0) {
-                    data = await fetchLocations(fallbackUrl);
-                }
+                data = Array.isArray(data)
+                    ? data.filter((result) => {
+                        const lat = parseFloat(result.lat);
+                        const lon = parseFloat(result.lon);
+                        return surakartaBounds.contains([lat, lon]);
+                    })
+                    : [];
 
                 searchResults.innerHTML = '';
                 

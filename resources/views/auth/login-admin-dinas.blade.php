@@ -59,7 +59,7 @@
                         <label class="block text-xs font-bold uppercase tracking-wide text-slate-700 mb-1">Password</label>
                         <div class="relative">
                             <input id="passwordInput" type="password" name="password" value="{{ old('password', request('password')) }}" class="w-full rounded-md border border-slate-300 bg-white px-4 py-3 pr-12 focus:ring-2 focus:ring-[#294d7b] outline-none" placeholder="Masukkan password" required>
-                            <button type="button" id="togglePassword" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700" aria-label="Lihat password">
+                            <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-500 hover:text-slate-700 leading-none" aria-label="Lihat password">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />

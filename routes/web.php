@@ -94,6 +94,12 @@ Route::middleware('guest')->group(function () {
     })->name('register');
 
     Route::post('/register', [RegisterController::class, 'register']);
+
+    // Forgot password
+    Route::get('/forgot-password', function () {
+        return view('auth.forgot-password');
+    })->name('password.request');
+    Route::post('/forgot-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 });
 
 // Logout umum untuk user yang sudah login

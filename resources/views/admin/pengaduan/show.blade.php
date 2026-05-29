@@ -95,9 +95,9 @@
         <div class="space-y-6">
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
                 <h4 class="text-lg font-bold text-navy-900 mb-4">Foto Bukti</h4>
-                @if($pengaduan->foto_bukti)
-                    <a href="{{ asset('storage/' . $pengaduan->foto_bukti) }}" target="_blank" class="block">
-                        <img src="{{ asset('storage/' . $pengaduan->foto_bukti) }}" alt="Foto Bukti" class="w-full rounded-xl border border-slate-200">
+                @if($pengaduan->foto_bukti_url)
+                    <a href="{{ $pengaduan->foto_bukti_url }}" target="_blank" class="block">
+                        <img src="{{ $pengaduan->foto_bukti_url }}" alt="Foto Bukti" class="w-full rounded-xl border border-slate-200">
                     </a>
                     <p class="text-xs text-slate-500 mt-2">Klik gambar untuk membuka ukuran penuh.</p>
                 @else
@@ -106,6 +106,16 @@
                     </div>
                 @endif
             </div>
+
+            @if($pengaduan->bukti_selesai_url)
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+                <h4 class="text-lg font-bold text-navy-900 mb-4">Bukti Penyelesaian</h4>
+                <a href="{{ $pengaduan->bukti_selesai_url }}" target="_blank" class="block">
+                    <img src="{{ $pengaduan->bukti_selesai_url }}" alt="Bukti Selesai" class="w-full rounded-xl border border-slate-200">
+                </a>
+                <p class="text-xs text-slate-500 mt-2">Foto bukti penanganan admin.</p>
+            </div>
+            @endif
 
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
                 <h4 class="text-lg font-bold text-navy-900 mb-3">Update Status</h4>

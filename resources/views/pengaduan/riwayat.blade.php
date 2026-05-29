@@ -90,17 +90,17 @@
                 <p class="text-sm text-gray-600 leading-relaxed">{{ $item->deskripsi }}</p>
             </div>
             
-            @if($item->foto_bukti)
+            @if($item->foto_bukti_url)
             <div class="p-4 bg-white border border-gray-100 rounded-xl flex items-center gap-3">
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Lampiran Foto:</p>
-                <a href="{{ asset('storage/' . $item->foto_bukti) }}" target="_blank" class="text-sm text-blue-600 hover:underline">Lihat Foto</a>
+                <a href="{{ $item->foto_bukti_url }}" target="_blank" class="text-sm text-blue-600 hover:underline">Lihat Foto</a>
             </div>
             @endif
 
-            @if($item->status === 'Selesai' && $item->bukti_selesai)
+            @if($item->status === 'Selesai' && $item->bukti_selesai_url)
             <div class="p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
                 <p class="text-[10px] font-bold text-emerald-600 uppercase tracking-wider mb-2">Bukti Pengaduan Selesai</p>
-                <a href="{{ asset('storage/' . $item->bukti_selesai) }}" target="_blank" class="text-sm text-emerald-700 hover:underline font-semibold">Lihat Bukti Pengerjaan</a>
+                <a href="{{ $item->bukti_selesai_url }}" target="_blank" class="text-sm text-emerald-700 hover:underline font-semibold">Lihat Bukti Pengerjaan</a>
             </div>
             @endif
         </div>

@@ -15,32 +15,50 @@
             @csrf
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nama Lengkap *</label>
-                <input type="text" name="name" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Masukkan nama lengkap" required>
+                <input type="text" name="name" value="{{ old('name') }}" class="w-full px-4 py-3 rounded-xl border @error('name') border-red-500 @else border-gray-200 @enderror bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Masukkan nama lengkap" required autofocus>
+                @error('name')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1.5">Email *</label>
-                <input type="email" name="email" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Masukkan email" required>
+                <input type="email" name="email" value="{{ old('email') }}" class="w-full px-4 py-3 rounded-xl border @error('email') border-red-500 @else border-gray-200 @enderror bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Masukkan email" required>
+                @error('email')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1.5">Alamat *</label>
-                <input type="text" name="alamat" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Alamat tempat tinggal" required>
+                <input type="text" name="alamat" value="{{ old('alamat') }}" class="w-full px-4 py-3 rounded-xl border @error('alamat') border-red-500 @else border-gray-200 @enderror bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Alamat tempat tinggal" required>
+                @error('alamat')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1.5">Nomor KTP *</label>
-                <input type="text" name="ktp" maxlength="16" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="16 digit nomor KTP" required>
+                <input type="text" name="ktp" value="{{ old('ktp') }}" maxlength="16" class="w-full px-4 py-3 rounded-xl border @error('ktp') border-red-500 @else border-gray-200 @enderror bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="16 digit nomor KTP" required>
+                @error('ktp')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1.5">No. Telepon *</label>
-                <input type="text" name="no_hp" maxlength="20" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="08xxxxxxxxxx" required>
+                <input type="text" name="no_hp" value="{{ old('no_hp') }}" maxlength="20" class="w-full px-4 py-3 rounded-xl border @error('no_hp') border-red-500 @else border-gray-200 @enderror bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="08xxxxxxxxxx" required>
+                @error('no_hp')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>
                 <label class="block text-sm font-semibold text-gray-700 mb-1.5">Kata Sandi *</label>
-                <input type="password" name="password" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Minimal 6 karakter" required>
+                <input type="password" name="password" class="w-full px-4 py-3 rounded-xl border @error('password') border-red-500 @else border-gray-200 @enderror bg-gray-50 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Minimal 8 karakter" required>
+                @error('password')
+                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
             <div>

@@ -89,8 +89,9 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        // $this->guard()->login($user); // Baris ini dikomentari agar TIDAK login otomatis
+        // Login otomatis setelah registrasi berhasil
+        $this->guard()->login($user); 
 
-        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan masuk dengan akun baru Anda.');
+        return redirect()->route('pengaduan.riwayat')->with('success', 'Registrasi berhasil! Selamat datang di Layanan Surakarta.');
     }
 }
